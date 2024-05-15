@@ -1,21 +1,23 @@
-# project name (generate executable with this name)
-TARGET   = proj1
+# assignment name (generate executable with this name)
+TEST_TARGET = tester
 
 CPP       = g++ --std=c++11 -c
-# compiling flags here
-CPPFLAGS   = -Wall -I.
-
+CPPFLAGS   = -Wall -I. -g
 LINKER   = g++ -o
-# linking flags here
 LFLAGS   = -Wall
 
-SOURCES  := $(wildcard *.cpp)
+SOURCES	:= $(wildcard *.cpp)
 INCLUDES := $(wildcard *.h)
-OBJECTS  := $(SOURCES:.cpp=*.o)
+OBJECTS  := $(SOURCES:.cpp=.o)
 rm       = rm -f
 
-$(TARGET): obj
-	$(LINKER) $(TARGET) $(LFLAGS) $(OBJECTS)
+.PHONY: obj clean all
+
+all: $(TEST_TARGET)
+
+
+$(TEST_TARGET): obj
+	$(LINKER) $(TEST_TARGET) $(LFLAGS) $(OBJECTS)
 	@echo "Linking complete!"
 
 obj: $(SOURCES) $(INCLUDES)
@@ -23,5 +25,6 @@ obj: $(SOURCES) $(INCLUDES)
 	@echo "Compilation complete!"
 
 clean:
-	@$(rm) $(TARGET) $(OBJECTS)
+	$(rm) $(TEST_TARGET) $(OBJECTS)
 	@echo "Cleanup complete!"
+
