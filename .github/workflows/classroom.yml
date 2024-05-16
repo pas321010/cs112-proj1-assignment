@@ -1,6 +1,6 @@
 name: Autograding Tests
 'on':
-- workflow_dispatch
+- push
 - repository_dispatch
 permissions:
   checks: write
@@ -13,18 +13,28 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    - name: tests
-      id: tests
+    - name: step1
+      id: step1
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: tests
-        setup-command: make tester
-        command: "./tester"
+        test-name: step1
+        setup-command: make
+        command: "./tester step1"
+        timeout: 10
+        max-score: 1
+    - name: step2
+      id: step2
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: step2
+        setup-command: make
+        command: "./tester step2"
         timeout: 10
         max-score: 1
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
-        TESTS_RESULTS: "${{steps.tests.outputs.result}}"
+        STEP1_RESULTS: "${{steps.step1.outputs.result}}"
+        STEP2_RESULTS: "${{steps.step2.outputs.result}}"
       with:
-        runners: tests
+        runners: step1,step2
