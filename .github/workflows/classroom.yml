@@ -31,10 +31,30 @@ jobs:
         command: "./tester step2"
         timeout: 10
         max-score: 1
+    - name: step3
+      id: step3
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: step3
+        setup-command: make
+        command: "./tester step3"
+        timeout: 10
+        max-score: 1
+    - name: step4
+      id: step4
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: step4
+        setup-command: make
+        command: "./tester step4"
+        timeout: 10
+        max-score: 1
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
         STEP1_RESULTS: "${{steps.step1.outputs.result}}"
         STEP2_RESULTS: "${{steps.step2.outputs.result}}"
+        STEP3_RESULTS: "${{steps.step3.outputs.result}}"
+        STEP4_RESULTS: "${{steps.step4.outputs.result}}"
       with:
-        runners: step1,step2
+        runners: step1,step2,step3,step4
