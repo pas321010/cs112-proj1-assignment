@@ -11,7 +11,9 @@ TEST_CASE("step1") {
 }
 
 TEST_CASE("step2") {
-    // REQUIRE(constrain2(2.0) == 2.0);
+    REQUIRE(constrain2(2.0) == 2.0);
+    REQUIRE(constrain2(-1.5) == 0.0);
+    REQUIRE(constrain2(115.0) == 100.0);
 }
 
 TEST_CASE("step3") {
