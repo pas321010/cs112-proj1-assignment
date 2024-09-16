@@ -17,6 +17,10 @@ TEST_CASE("step2") {
 }
 
 TEST_CASE("step3") {
+    REQUIRE(isPrime(4) == false);
+    REQUIRE(isPrime(1) == true);
+    REQUIRE(isPrime(12) == false);
+    REQUIRE(isPrime(13) == true);
 }
 
 TEST_CASE("step4") {
