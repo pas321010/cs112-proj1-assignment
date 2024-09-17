@@ -24,4 +24,9 @@ TEST_CASE("step3") {
 }
 
 TEST_CASE("step4") {
-}
+    unsigned int lengthb = 100;
+    unsigned primes[lengthb];
+    findNPrimes(primes,lengthb);
+    REQUIRE(primes[100] == 541);
+    
+}   
